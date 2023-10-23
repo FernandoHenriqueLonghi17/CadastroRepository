@@ -1,0 +1,16 @@
+@RestController
+@RequestMapping("/cadastros")
+public class CadastroController {
+    private final CadastroRepository cadastroRepository;
+
+    @Autowired
+    public CadastroController(CadastroRepository cadastroRepository) {
+        this.cadastroRepository = cadastroRepository;
+    }
+
+    @PostMapping
+    public ResponseEntity<Cadastro> cadastrar(@RequestBody Cadastro cadastro) {
+        Cadastro novoCadastro = cadastroRepository.save(cadastro);
+        return new ResponseEntity<>(novoCadastro, HttpStatus.CREATED);
+    }
+}
